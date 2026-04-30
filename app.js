@@ -8,8 +8,13 @@ const middlewarsError404 = require('./middlewars/middlewarsError404');
 const middlewarsError500 = require('./middlewars/middlewarsError500');
 
 
+
+
 // Middleware per il parsing del corpo delle richieste
 app.use(express.json());
+
+// Importa i router
+const moviesRouter = require('./routers/moviesRouters');
 
 // Serve file statici dalla cartella "public"
 app.use(express.static('public')); 
@@ -21,10 +26,8 @@ app.get('/', (req, res) => {
   res.send('Benvenuto al blog dedicato al cinema e alla televisione!');
 });
 
-app.get('/movies', (req, res) => {
-  res.send('Qui puoi trovare recensioni e notizie sui film più recenti!');
-});
-
+// Rotta per ottenere tutte le recensioni
+app.use('/movies', moviesRouter);
 
 
 // Middleware per gestire errori 404 e 500
