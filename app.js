@@ -1,6 +1,6 @@
 const express = require('express');
 const app = express();
-const port = 30000;
+const port = 3000;
 
 
 // Importa i middleware per gestire errori 404 e 500
@@ -33,6 +33,8 @@ app.use('/movies', moviesRouter);
 // Middleware per gestire errori 404 e 500
 app.use(middlewarsError404);
 app.use(middlewarsError500);
+
+
 // Aggiungi altre rotte per gestire le richieste specifiche del tuo blog
 app.listen(port, () => {
   console.log(`Example app listening at http://localhost:${port}`);
