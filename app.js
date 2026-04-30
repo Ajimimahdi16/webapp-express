@@ -1,0 +1,36 @@
+const express = require('express');
+const app = express();
+const port = 3000;
+
+
+// Importa i middleware per gestire errori 404 e 500
+const middlewarsError404 = require('./middlewars/middlewarsError404');
+const middlewarsError500 = require('./middlewars/middlewarsError500');
+
+
+// Middleware per il parsing del corpo delle richieste
+app.use(express.json());
+
+// Serve file statici dalla cartella "public"
+app.use(express.static('public')); 
+
+
+
+// Middleware per il parsing del corpo delle richieste
+app.get('/', (req, res) => {
+  res.send('Benvenuto al blog dedicato al cinema e alla televisione!');
+});
+
+app.get('/movies', (req, res) => {
+  res.send('Qui puoi trovare recensioni e notizie sui film più recenti!');
+});
+
+
+
+// Middleware per gestire errori 404 e 500
+app.use(middlewarsError404);
+app.use(middlewarsError500);
+// Aggiungi altre rotte per gestire le richieste specifiche del tuo blog
+app.listen(port, () => {
+  console.log(`Example app listening at http://localhost:${port}`);
+});
