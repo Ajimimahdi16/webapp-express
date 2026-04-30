@@ -1,6 +1,6 @@
 const express = require('express');
 const app = express();
-const port = 3000;
+const port = 30000;
 
 
 // Importa i middleware per gestire errori 404 e 500
