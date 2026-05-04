@@ -7,7 +7,10 @@ const port = 3000;
 const middlewarsError404 = require('./middlewars/middlewarsError404');
 const middlewarsError500 = require('./middlewars/middlewarsError500');
 
+const setImagePath = require('./middlewars/imagePath');
 
+// Middleware per impostare il percorso delle immagini
+app.use(setImagePath);
 
 
 // Middleware per il parsing del corpo delle richieste
