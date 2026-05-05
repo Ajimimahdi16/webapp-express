@@ -11,7 +11,14 @@ function index(req, res) {
       console.error('Errore durante la query:', err);
       res.status(500).json({ error: 'Errore del server' });
     } else {
-      res.json(results);
+
+      const moviesWithImagePath = results.map(movie => {
+        return {
+          ...movie,
+          image_url: req.imagePath + movie.image_url // Aggiungiamo il percorso completo dell'immagine a ogni film
+        };
+      });
+      res.json(moviesWithImagePath);
     }
   });
 }
@@ -34,6 +41,8 @@ function show(req, res) {
 
         // Definiamo il singolo film 
         const movie = moviesResults[0];
+
+        movie.image_url = req.imagePath + movie.image_url; // Aggiungiamo il percorso completo dell'immagine al film
 
         //  Eseguiamo la seconda query per le recensioni, annidata nella prima
         connection.query(reviewsSql, [id], (err, reviewsResults) => {
