@@ -18,7 +18,7 @@ function index(req, res) {
       const moviesWithImagePath = results.map((movie) => {
         return {
           ...movie,
-          image: req.image + movie.image 
+          image: req.imagePath + movie.image 
         };
       });
       res.json(moviesWithImagePath);
