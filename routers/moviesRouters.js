@@ -10,4 +10,7 @@ router.get('/', moviesController.index);
 // Rotta per ottenere un film specifico per ID
 router.get('/:id', moviesController.show);
 
+//store aggiunta di un nuovo film
+//router.post('/', moviesController.store);
+
 module.exports = router;

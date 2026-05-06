@@ -6,16 +6,19 @@ const connection = require('../data/db');
 
 // Questa funzione esegue una query per selezionare tutti i film dalla tabella "movies" e restituisce i risultati come JSON
 function index(req, res) {
-  connection.query('SELECT * FROM movies', (err, results) => {
+
+  const sql = 'SELECT * FROM movies';
+  
+  connection.query(sql, (err, results) => {
     if (err) {
       console.error('Errore durante la query:', err);
       res.status(500).json({ error: 'Errore del server' });
     } else {
 
-      const moviesWithImagePath = results.map(movie => {
+      const moviesWithImagePath = results.map((movie) => {
         return {
           ...movie,
-          image_url: req.imagePath + movie.image_url // Aggiungiamo il percorso completo dell'immagine a ogni film
+          image: req.image + movie.image 
         };
       });
       res.json(moviesWithImagePath);
@@ -42,7 +45,7 @@ function show(req, res) {
         // Definiamo il singolo film 
         const movie = moviesResults[0];
 
-        movie.image_url = req.imagePath + movie.image_url; // Aggiungiamo il percorso completo dell'immagine al film
+        movie.image = req.imagePath + movie.image; // Aggiungiamo il percorso completo dell'immagine al film
 
         //  Eseguiamo la seconda query per le recensioni, annidata nella prima
         connection.query(reviewsSql, [id], (err, reviewsResults) => {
@@ -58,6 +61,7 @@ function show(req, res) {
         }); 
     }); 
 }
+
 
 module.exports = {
   index,

@@ -5,7 +5,7 @@ const port = 3000;
 const cors = require("cors");
 
 app.use(cors({
-  origin: 'http://localhost:5173' // Sostituisci con l'origine del tuo frontend
+  origin: 'http://localhost:5173/' 
 }));
 
 // Importa i middleware per gestire errori 404 e 500
